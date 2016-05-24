@@ -1,5 +1,6 @@
 import iapws
 
+
 class Condenser:
     """
     The condenser class
@@ -21,7 +22,7 @@ class Condenser:
     def simulate(self, desiredOutletTemp):
         """
         Simulates the Condenser and tries to get the exit temperature down
-        to the desiredOutletTemp. This is done by continuously extracting h 
+        to the desiredOutletTemp. This is done by continuously extracting h
         while keeping the P constant.
         """
 
@@ -30,7 +31,8 @@ class Condenser:
         hDecrement = 1
 
         while exitState.T >= desiredOutletTemp:
-            exitState = iapws.IAPWS97(h=exitState.h - hDecrement, P=exitState.P)
+            exitState = iapws.IAPWS97(h=exitState.h - hDecrement,
+                                      P=exitState.P)
             print exitState.h
 
         self.exitState = exitState
