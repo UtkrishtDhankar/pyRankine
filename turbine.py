@@ -34,11 +34,11 @@ class Turbine():
 
         exitState = self.inletState
 
-        hDecrement = 0.01
+        hDecrement = 1
 
         while exitState.x >= desiredOutletQuality:
-            exitState = iapws.IAPWS(h=exitState.h - hDecrement, s=exitState.s)
+            exitState = iapws.IAPWS97(h=exitState.h - hDecrement, s=exitState.s)
 
         self.exitState = exitState
 
-        self.workExtracted = self.exitState.h - self.inletState.h
+        self.workExtracted = - self.exitState.h + self.inletState.h
