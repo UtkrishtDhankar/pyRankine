@@ -6,7 +6,7 @@ import iapws
 
 
 def main():
-    condenserExitTemp = 283
+    condenserOverCool = 0.1
     condenserPressure = 0.006
     boilerPressure = 2
 
@@ -16,8 +16,11 @@ def main():
     turbineInletTemperature = iapws.IAPWS97(P=boilerPressure,
                                             s=turbineEntropy).T
 
-    condenserExitState = iapws.IAPWS97(T=condenserExitTemp,
+    condenserExitState = iapws.IAPWS97(x=0,
                                        P=condenserPressure)
+    condenserExitState = iapws.IAPWS97(h=condenserExitState.h -
+                                       condenserOverCool, P=condenserPressure)
+
     p = pump.Pump(condenserExitState)
     p.simulate(boilerPressure)
     print "Pump Simulation Completed"
