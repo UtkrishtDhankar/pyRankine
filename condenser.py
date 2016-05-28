@@ -33,7 +33,6 @@ class Condenser:
         while exitState.T >= desiredOutletTemp:
             exitState = iapws.IAPWS97(h=exitState.h - hDecrement,
                                       P=exitState.P)
-            print exitState.h
 
         self.exitState = exitState
 
