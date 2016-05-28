@@ -32,6 +32,7 @@ class Turbine():
         desiredOutletQuality: The quality of the turbine exit
         """
 
-        self.exitState = iapws.IAPWS97(P=desiredOutletPressure, s=self.inletState.s)
+        self.exitState = iapws.IAPWS97(P=desiredOutletPressure,
+                                       s=self.inletState.s)
 
         self.workExtracted = - self.exitState.h + self.inletState.h
