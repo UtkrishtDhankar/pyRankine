@@ -26,14 +26,7 @@ class Condenser:
         while keeping the P constant.
         """
 
-        exitState = self.inletState
-
-        hDecrement = 1
-
-        while exitState.T >= desiredOutletTemp:
-            exitState = iapws.IAPWS97(h=exitState.h - hDecrement,
-                                      P=exitState.P)
-
-        self.exitState = exitState
+        self.exitState = iapws.IAPWS97(P=self.inletState.P,
+                                       T=desiredOutletTemp)
 
         self.heatExtracted = self.inletState.h - self.exitState.h

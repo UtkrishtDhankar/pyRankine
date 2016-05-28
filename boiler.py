@@ -26,14 +26,7 @@ class Boiler:
         while keeping the P constant.
         """
 
-        exitState = self.inletState
-
-        hIncrement = 1
-
-        while exitState.T <= desiredOutletTemp:
-            exitState = iapws.IAPWS97(h=exitState.h + hIncrement,
-                                      P=exitState.P)
-
-        self.exitState = exitState
+        self.exitState = iapws.IAPWS97(T=desiredOutletTemp,
+                                       P=self.inletState.P)
 
         self.heatAdded = self.exitState.h - self.inletState.h
