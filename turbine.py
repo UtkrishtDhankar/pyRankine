@@ -22,7 +22,7 @@ class Turbine():
 
         self.inletState = inletState
 
-    def simulate(self, desiredOutletQuality):
+    def simulate(self, desiredOutletPressure):
         """
         Simulates the turbine and tries to have the exit quality
         as desiredOutletQuality. It does so by progressively and
@@ -32,13 +32,6 @@ class Turbine():
         desiredOutletQuality: The quality of the turbine exit
         """
 
-        exitState = self.inletState
+        self.exitState = iapws.IAPWS97(P=desiredOutletPressure, s=self.inletState.s)
 
-        hDecrement = 0.01
-
-        while exitState.x >= desiredOutletQuality:
-            exitState = iapws.IAPWS(h=exitState.h - hDecrement, s=exitState.s)
-
-        self.exitState = exitState
-
-        self.workExtracted = self.exitState.h - self.inletState.h
+        self.workExtracted = - self.exitState.h + self.inletState.h
