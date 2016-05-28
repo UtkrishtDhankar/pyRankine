@@ -6,6 +6,8 @@ To install its dependencies, (`tabulate` and `iapws`) run the following. Note th
 
 ```
 pip install tabulate
+pip install numpy 
+pip install scipy
 pip install iapws
 ```
 
