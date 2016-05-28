@@ -6,21 +6,21 @@ import iapws
 
 
 def main():
-    condenserExitState = iapws.IAPWS97(T=283, P=0.1)
+    condenserExitState = iapws.IAPWS97(T=283, P=0.006)
     boilerPressure = 2
     p = pump.Pump(condenserExitState)
     p.simulate(boilerPressure)
     print "Pump Simulation Completed"
     print p.exitState.P, p.exitState.T, p.exitState.x
 
-    turbineInletTemperature = 1000
+    turbineInletTemperature = 560
     b = boiler.Boiler(p.exitState)
     b.simulate(turbineInletTemperature)
     print "Boiler Simulation Completed"
     print b.exitState.P, b.exitState.T, b.exitState.x
 
     t = turbine.Turbine(b.exitState)
-    t.simulate(0.9)
+    t.simulate(0.006)
     print "Turbine Simulation Completed"
     print t.exitState.P, t.exitState.T, t.exitState.x
 
