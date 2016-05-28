@@ -9,7 +9,12 @@ def main():
     condenserExitTemp = 283
     condenserPressure = 0.006
     boilerPressure = 2
-    turbineInletTemperature = 560
+
+    desiredQuality = 0.9
+    turbineEntropy = iapws.IAPWS97(P=condenserPressure, x=desiredQuality).s
+
+    turbineInletTemperature = iapws.IAPWS97(P=boilerPressure,
+                                            s=turbineEntropy).T
 
     condenserExitState = iapws.IAPWS97(T=condenserExitTemp,
                                        P=condenserPressure)
